@@ -6,12 +6,12 @@ public class Modelo extends Marca {
   private String dadosModelo;
 
   public Modelo() {
-    this.idModelo = -1; // TODO procurar se id tá disponível
+    this.idModelo = -1; // TODO procurar se id ta disponivel
     this.dadosModelo = new String();
   }
 
   public Modelo(int idModelo, String dadosModelo) {
-    this.idModelo = idModelo; // TODO procurar se id tá disponível
+    this.idModelo = idModelo; // TODO procurar se id ta disponivel
     this.dadosModelo = dadosModelo;
   }
 
@@ -20,7 +20,7 @@ public class Modelo extends Marca {
   }
 
   public void setIdModelo(int idModelo) {
-    this.idModelo = idModelo; // TODO procurar se id tá disponível
+    this.idModelo = idModelo; // TODO procurar se id ta disponivel
   }
 
   public String getDadosModelo() {

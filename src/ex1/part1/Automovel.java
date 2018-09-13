@@ -15,7 +15,7 @@ public class Automovel extends Modelo {
   // TODO ETC?
 
   public Automovel() {
-    this.idAutomovel = -1; // TODO procurar se id tá disponível
+    this.idAutomovel = -1; // TODO procurar se id ta disponivel
     this.numeroDaPlaca = new String();
     this.cor = new String();
     this.ano = -1;
@@ -30,7 +30,7 @@ public class Automovel extends Modelo {
   public Automovel(int idAutomovel, String numeroDaPlaca, String cor, int ano,
       String tipoDeCombustivel, int numeroDePortas, double quilometragem, int renavam,
       String chassi, double valorDeLocacao) {
-    this.idAutomovel = idAutomovel; // TODO procurar se id tá disponível
+    this.idAutomovel = idAutomovel; // TODO procurar se id ta disponivel
     this.numeroDaPlaca = numeroDaPlaca;
     this.cor = cor;
     this.ano = ano;
@@ -47,7 +47,7 @@ public class Automovel extends Modelo {
   }
 
   public void setIdAutomovel(int idAutomovel) {
-    this.idAutomovel = idAutomovel; // TODO procurar se id tá disponível
+    this.idAutomovel = idAutomovel; // TODO procurar se id ta disponivel
   }
 
   public String getNumeroDaPlaca() {
@@ -118,7 +118,7 @@ public class Automovel extends Modelo {
     return this.valorDeLocacao;
   }
 
-  public void setValorDeLocação(double valorDeLocacao) {
+  public void setValorDeLocacao(double valorDeLocacao) {
     this.valorDeLocacao = valorDeLocacao;
   }
 

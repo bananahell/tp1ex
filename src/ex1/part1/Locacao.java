@@ -16,7 +16,7 @@ public class Locacao {
   private String placa;
 
   public Locacao() {
-    this.idLocacao = -1; // TODO procurar se id tá disponível
+    this.idLocacao = -1; // TODO procurar se id ta disponivel
     this.dataHoraLocado = new Date();
     this.dataHoraDevolvido = new Date();
     this.agenciaLocada = -1;
@@ -29,7 +29,7 @@ public class Locacao {
 
   public Locacao(int idLocacao, Date dataHoraLocado, Date dataHoraDevolvido, int agenciaLocada,
       int agenciaDevolvida, int cpf, String tipo, double valor, String placa) {
-    this.idLocacao = idLocacao; // TODO procurar se id tá disponível
+    this.idLocacao = idLocacao; // TODO procurar se id ta disponivel
     this.dataHoraLocado = dataHoraLocado;
     this.dataHoraDevolvido = dataHoraDevolvido;
     this.agenciaLocada = agenciaLocada;
@@ -49,7 +49,7 @@ public class Locacao {
   }
 
   public void setIdLocacao(int idLocacao) {
-    this.idLocacao = idLocacao; // TODO procurar se id tá disponível
+    this.idLocacao = idLocacao; // TODO procurar se id ta disponivel
   }
 
   public Date getDataHoraLocado() {

@@ -6,12 +6,12 @@ public class Marca {
   private String dadosMarca;
 
   public Marca() {
-    this.idMarca = -1; // TODO procurar se id tá disponível
+    this.idMarca = -1; // TODO procurar se id ta disponivel
     this.dadosMarca = new String();
   }
 
   public Marca(int idMarca, String dadosMarca) {
-    this.idMarca = idMarca; // TODO procurar se id tá disponível
+    this.idMarca = idMarca; // TODO procurar se id ta disponivel
     this.dadosMarca = dadosMarca;
   }
 
@@ -20,7 +20,7 @@ public class Marca {
   }
 
   public void setIdMarca(int idMarca) {
-    this.idMarca = idMarca; // TODO procurar se id tá disponível
+    this.idMarca = idMarca; // TODO procurar se id ta disponivel
   }
 
   public String getDadosMarca() {
