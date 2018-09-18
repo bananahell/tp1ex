@@ -1,3 +1,4 @@
 1-criar uma super classe pessoa para ter alguma herança no uml
 2-criar a interface
 3-talvez nao seja uma ideia tao boa colocar o cliente no sistema
+4-colocar palavras entre as relações justamente para ficar mais semântico
