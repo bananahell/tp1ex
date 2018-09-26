@@ -2,7 +2,6 @@ package ex1.part1;
 
 public class Automovel extends Modelo {
 
-  private int idAutomovel;
   private String numeroDaPlaca;
   private String cor;
   private int ano;
@@ -12,10 +11,9 @@ public class Automovel extends Modelo {
   private int renavam;
   private String chassi;
   private double valorDeLocacao;
-  // TODO ETC?
 
   public Automovel() {
-    this.idAutomovel = -1; // TODO procurar se id ta disponivel
+    super();
     this.numeroDaPlaca = new String();
     this.cor = new String();
     this.ano = -1;
@@ -27,10 +25,10 @@ public class Automovel extends Modelo {
     this.valorDeLocacao = -1;
   }
 
-  public Automovel(int idAutomovel, String numeroDaPlaca, String cor, int ano,
-      String tipoDeCombustivel, int numeroDePortas, double quilometragem, int renavam,
-      String chassi, double valorDeLocacao) {
-    this.idAutomovel = idAutomovel; // TODO procurar se id ta disponivel
+  public Automovel(String numeroDaPlaca, String cor, int ano, String tipoDeCombustivel,
+      int numeroDePortas, double quilometragem, int renavam, String chassi, double valorDeLocacao,
+      Modelo modelo) {
+    super(modelo.getIdModelo(), modelo.getDadosModelo(), modelo.getMarca());
     this.numeroDaPlaca = numeroDaPlaca;
     this.cor = cor;
     this.ano = ano;
@@ -40,14 +38,6 @@ public class Automovel extends Modelo {
     this.renavam = renavam;
     this.chassi = chassi;
     this.valorDeLocacao = valorDeLocacao;
-  }
-
-  public int getIdAutomovel() {
-    return this.idAutomovel;
-  }
-
-  public void setIdAutomovel(int idAutomovel) {
-    this.idAutomovel = idAutomovel; // TODO procurar se id ta disponivel
   }
 
   public String getNumeroDaPlaca() {

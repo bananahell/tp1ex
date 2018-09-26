@@ -6,12 +6,12 @@ public class Marca {
   private String dadosMarca;
 
   public Marca() {
-    this.idMarca = -1; // TODO procurar se id ta disponivel
+    this.idMarca = _MainClass.SEM_MARCA;
     this.dadosMarca = new String();
   }
 
   public Marca(int idMarca, String dadosMarca) {
-    this.idMarca = idMarca; // TODO procurar se id ta disponivel
+    this.idMarca = idMarca;
     this.dadosMarca = dadosMarca;
   }
 

@@ -6,12 +6,13 @@ public class Modelo extends Marca {
   private String dadosModelo;
 
   public Modelo() {
-    this.idModelo = -1; // TODO procurar se id ta disponivel
+    this.idModelo = _MainClass.SEM_MODELO;
     this.dadosModelo = new String();
   }
 
-  public Modelo(int idModelo, String dadosModelo) {
-    this.idModelo = idModelo; // TODO procurar se id ta disponivel
+  public Modelo(int idModelo, String dadosModelo, Marca marca) {
+    super(marca.getIdMarca(), marca.getDadosMarca());
+    this.idModelo = idModelo;
     this.dadosModelo = dadosModelo;
   }
 
@@ -29,6 +30,10 @@ public class Modelo extends Marca {
 
   public void setDadosModelo(String dadosModelo) {
     this.dadosModelo = dadosModelo;
+  }
+
+  public Marca getMarca() {
+    return this;
   }
 
 }

@@ -27,9 +27,9 @@ public class Locacao {
     this.placa = new String();
   }
 
-  public Locacao(int idLocacao, Date dataHoraLocado, Date dataHoraDevolvido, int agenciaLocada,
+  public Locacao(Date dataHoraLocado, Date dataHoraDevolvido, int agenciaLocada,
       int agenciaDevolvida, int cpf, String tipo, double valor, String placa) {
-    this.idLocacao = idLocacao; // TODO procurar se id ta disponivel
+    this.idLocacao = this.idLocacao; // TODO procurar se id ta disponivel
     this.dataHoraLocado = dataHoraLocado;
     this.dataHoraDevolvido = dataHoraDevolvido;
     this.agenciaLocada = agenciaLocada;
