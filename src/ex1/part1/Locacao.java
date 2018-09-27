@@ -16,7 +16,7 @@ public class Locacao {
   private String placa;
 
   public Locacao() {
-    this.idLocacao = -1; // TODO procurar se id ta disponivel
+    this.idLocacao = Locadora.getUltimaLocacao() + 1;
     this.dataHoraLocado = new Date();
     this.dataHoraDevolvido = new Date();
     this.agenciaLocada = -1;
@@ -27,9 +27,22 @@ public class Locacao {
     this.placa = new String();
   }
 
+  public Locacao(Date dataHoraLocado, int agenciaLocada, int cpf, String tipo, double valor,
+      String placa) {
+    this.idLocacao = Locadora.getUltimaLocacao() + 1;
+    this.dataHoraLocado = dataHoraLocado;
+    this.dataHoraDevolvido = new Date();
+    this.agenciaLocada = agenciaLocada;
+    this.agenciaDevolvida = -1;
+    this.cpf = cpf;
+    this.tipo = tipo;
+    this.valor = valor;
+    this.placa = placa;
+  }
+
   public Locacao(Date dataHoraLocado, Date dataHoraDevolvido, int agenciaLocada,
       int agenciaDevolvida, int cpf, String tipo, double valor, String placa) {
-    this.idLocacao = this.idLocacao; // TODO procurar se id ta disponivel
+    this.idLocacao = Locadora.getUltimaLocacao() + 1;
     this.dataHoraLocado = dataHoraLocado;
     this.dataHoraDevolvido = dataHoraDevolvido;
     this.agenciaLocada = agenciaLocada;

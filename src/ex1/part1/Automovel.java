@@ -12,9 +12,9 @@ public class Automovel extends Modelo {
   private String chassi;
   private double valorDeLocacao;
 
-  public Automovel() {
+  public Automovel(String numeroDaPlaca) {
     super();
-    this.numeroDaPlaca = new String();
+    this.numeroDaPlaca = numeroDaPlaca;
     this.cor = new String();
     this.ano = -1;
     this.tipoDeCombustivel = new String();
@@ -110,6 +110,10 @@ public class Automovel extends Modelo {
 
   public void setValorDeLocacao(double valorDeLocacao) {
     this.valorDeLocacao = valorDeLocacao;
+  }
+
+  public Modelo getModelo() {
+    return this;
   }
 
 }

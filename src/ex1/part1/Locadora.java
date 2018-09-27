@@ -5,53 +5,70 @@ import java.util.ArrayList;
 
 public class Locadora {
 
-  private ArrayList<Automovel> automoveis = new ArrayList<>();
-  private ArrayList<Cliente> clientes = new ArrayList<>();
-  private ArrayList<Locacao> locacoes = new ArrayList<>();
-  private ArrayList<Agencia> agencias = new ArrayList<>();
+  private static ArrayList<Automovel> automoveis = new ArrayList<>();
+  private static ArrayList<Cliente> clientes = new ArrayList<>();
+  private static ArrayList<Locacao> locacoes = new ArrayList<>();
+  private static ArrayList<Agencia> agencias = new ArrayList<>();
 
-  public int getIndiceAutomovel(String placa) {
-
-    for (int i = 0; i < this.automoveis.size(); i++) {
-      if (this.automoveis.get(i).getNumeroDaPlaca() == placa) {
-        return i;
-      }
-    }
-    return -1;
-
+  public static int getUltimaLocacao() {
+    return (Locadora.locacoes.isEmpty()) ? 0
+        : Locadora.locacoes.get(Locadora.locacoes.size() - 1).getIdLocacao();
   }
 
-  public int getIndiceCliente(int cpf) {
-
-    for (int i = 0; i < this.clientes.size(); i++) {
-      if (this.clientes.get(i).getCpf() == cpf) {
-        return i;
-      }
-    }
-    return -1;
-
+  public static void addAutomovel(Automovel automovel) {
+    Locadora.automoveis.add(automovel);
   }
 
-  public int getIndiceLocacao(int idLocacao) {
-
-    for (int i = 0; i < this.locacoes.size(); i++) {
-      if (this.locacoes.get(i).getIdLocacao() == idLocacao) {
-        return i;
-      }
-    }
-    return -1;
-
+  public static void addCliente(Cliente cliente) {
+    Locadora.clientes.add(cliente);
   }
 
-  public int getIndiceAgencia(int codAgencia) {
+  public static void addLocacao(Locacao locacao) {
+    Locadora.locacoes.add(locacao);
+  }
 
-    for (int i = 0; i < this.agencias.size(); i++) {
-      if (this.agencias.get(i).getCodAgencia() == codAgencia) {
-        return i;
+  public static void addAgencia(Agencia agencia) {
+    Locadora.agencias.add(agencia);
+  }
+
+  public static Automovel getAutomovel(String placa) throws Exception {
+    for (Automovel automovel : Locadora.automoveis) {
+      if (automovel.getNumeroDaPlaca() == placa) {
+        return automovel;
       }
     }
-    return -1;
+    throw new Exception();
+  }
 
+  public static Cliente getCliente(int cpf) throws Exception {
+    for (Cliente cliente : Locadora.clientes) {
+      if (cliente.getCpf() == cpf) {
+        return cliente;
+      }
+    }
+    throw new Exception();
+  }
+
+  public static Locacao getLocacao(int idLocacao) throws Exception {
+    for (Locacao locacao : Locadora.locacoes) {
+      if (locacao.getIdLocacao() == idLocacao) {
+        return locacao;
+      }
+    }
+    throw new Exception();
+  }
+
+  public static Agencia getAgencia(int codAgencia) throws Exception {
+    for (Agencia agencia : Locadora.agencias) {
+      if (agencia.getCodAgencia() == codAgencia) {
+        return agencia;
+      }
+    }
+    throw new Exception();
+  }
+  
+  public static void deleteAutomovel(String placa) throws Exception {
+    Automovel automovel = getAutomovel(placa);
   }
 
 }

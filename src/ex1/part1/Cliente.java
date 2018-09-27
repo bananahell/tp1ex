@@ -9,8 +9,8 @@ public class Cliente {
   private String nome;
   private ArrayList<Integer> telefone;
 
-  public Cliente() {
-    this.cpf = -1;
+  public Cliente(int cpf) {
+    this.cpf = cpf;
     this.nome = new String();
     this.telefone = new ArrayList<>();
   }

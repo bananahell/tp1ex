@@ -7,43 +7,43 @@ public class _MainClass {
 
   public static Marca chevrolet = new Marca(0, "A vida e assim");
   public static Modelo corsa = new Modelo(100, "Meu corsinha eu nao viro", _MainClass.chevrolet);
-  public Modelo celta = new Modelo();
+  public static Modelo celta = new Modelo(101, "o ceuta zul", _MainClass.chevrolet);
 
-  public Marca fiat = new Marca();
-  public Modelo palioTurbo = new Modelo();
-  public Modelo palioFire = new Modelo();
+  public static Marca fiat = new Marca(1, "Com tecnologia e personalidade");
+  public static Modelo palioTurbo = new Modelo(102, "PALIO TURBO", _MainClass.fiat);
+  public static Modelo palioFire = new Modelo(103, "meu palio ta pegando fogo", _MainClass.fiat);
 
-  public Marca volkswagen = new Marca();
-  public Modelo gol = new Modelo();
-  public Modelo fox = new Modelo();
+  public static Marca volkswagen = new Marca(2, "Das Auto");
+  public static Modelo gol = new Modelo(104, "#galvaoLivesMatter", _MainClass.volkswagen);
+  public static Modelo fox = new Modelo(105, "nove rabas", _MainClass.volkswagen);
 
-  public Marca ford = new Marca();
-  public Modelo capri = new Modelo();
-  public Modelo bronco = new Modelo();
+  public static Marca ford = new Marca(3, "Go Further");
+  public static Modelo capri = new Modelo(106, "sun", _MainClass.ford);
+  public static Modelo bronco = new Modelo(107, "carro racista", _MainClass.ford);
 
-  public Marca hyundai = new Marca();
-  public Modelo santaCruz = new Modelo();
-  public Modelo elantra = new Modelo();
+  public static Marca hyundai = new Marca(4, "Mais que cinco estrelas, 200 milhoes de coracoes");
+  public static Modelo santaCruz = new Modelo(108, "gloria a deux", _MainClass.hyundai);
+  public static Modelo elantra = new Modelo(109, "carro 2,718lantra", _MainClass.hyundai);
 
-  public Marca toyota = new Marca();
-  public Modelo hilux = new Modelo();
-  public Modelo corolla = new Modelo();
+  public static Marca toyota = new Marca(5, "Tradicao, qualidade, confianca");
+  public static Modelo hilux = new Modelo(110, "oi, luz!", _MainClass.toyota);
+  public static Modelo corolla = new Modelo(111, "cor, olha!", _MainClass.toyota);
 
-  public Marca renault = new Marca();
-  public Modelo clio = new Modelo();
-  public Modelo megane = new Modelo();
+  public static Marca renault = new Marca(6, "Passion for life");
+  public static Modelo clio = new Modelo(112, "CLIO", _MainClass.renault);
+  public static Modelo megane = new Modelo(113, "MEGAZINE LUIZA", _MainClass.renault);
 
-  public Marca honda = new Marca();
-  public Modelo civic = new Modelo();
-  public Modelo fit = new Modelo();
+  public static Marca honda = new Marca(7, "The power of dreams");
+  public static Modelo civic = new Modelo(114, "nao militar", _MainClass.honda);
+  public static Modelo fit = new Modelo(115, "carro que nao e carro", _MainClass.honda);
 
-  public Marca jeep = new Marca();
-  public Modelo cherokee = new Modelo();
-  public Modelo renegade = new Modelo();
+  public static Marca jeep = new Marca(8, "Liberdade e aventura desde 1941");
+  public static Modelo cherokee = new Modelo(116, "THUNDER HORSE", _MainClass.jeep);
+  public static Modelo renegade = new Modelo(117, "o king slayer", _MainClass.jeep);
 
-  public Marca nissan = new Marca();
-  public Modelo march = new Modelo();
-  public Modelo versa = new Modelo();
+  public static Marca nissan = new Marca(9, "Picape forte de verdade");
+  public static Modelo march = new Modelo(118, "abril", _MainClass.nissan);
+  public static Modelo versa = new Modelo(119, "proso", _MainClass.nissan);
 
   public static void main(String[] args) {
 

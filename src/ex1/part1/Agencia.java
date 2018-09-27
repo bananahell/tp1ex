@@ -5,8 +5,8 @@ public class Agencia {
   private int codAgencia;
   private String local;
 
-  public Agencia() {
-    this.codAgencia = -1;
+  public Agencia(int codAgencia) {
+    this.codAgencia = codAgencia;
     this.local = new String();
   }
 
