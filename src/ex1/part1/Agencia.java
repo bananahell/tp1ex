@@ -5,11 +5,6 @@ public class Agencia {
   private int codAgencia;
   private String local;
 
-  public Agencia(int codAgencia) {
-    this.codAgencia = codAgencia;
-    this.local = new String();
-  }
-
   public Agencia(int codAgencia, String local) {
     this.codAgencia = codAgencia;
     this.local = local;

@@ -5,11 +5,6 @@ public class Marca {
   private int idMarca;
   private String dadosMarca;
 
-  public Marca() {
-    this.idMarca = _MainClass.SEM_MARCA;
-    this.dadosMarca = new String();
-  }
-
   public Marca(int idMarca, String dadosMarca) {
     this.idMarca = idMarca;
     this.dadosMarca = dadosMarca;

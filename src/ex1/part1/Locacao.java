@@ -15,18 +15,6 @@ public class Locacao {
   private double valor;
   private String placa;
 
-  public Locacao() {
-    this.idLocacao = Locadora.getUltimaLocacao() + 1;
-    this.dataHoraLocado = new Date();
-    this.dataHoraDevolvido = new Date();
-    this.agenciaLocada = -1;
-    this.agenciaDevolvida = -1;
-    this.cpf = -1;
-    this.tipo = new String();
-    this.valor = -1;
-    this.placa = new String();
-  }
-
   public Locacao(Date dataHoraLocado, int agenciaLocada, int cpf, String tipo, double valor,
       String placa) {
     this.idLocacao = Locadora.getUltimaLocacao() + 1;

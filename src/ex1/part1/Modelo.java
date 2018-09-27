@@ -6,12 +6,6 @@ public class Modelo extends Marca {
   private String dadosModelo;
   private int numeroDePortas;
 
-  public Modelo() {
-    this.idModelo = _MainClass.SEM_MODELO;
-    this.dadosModelo = new String();
-    this.numeroDePortas = -1;
-  }
-
   public Modelo(int idModelo, String dadosModelo, int numeroDePortas, Marca marca) {
     super(marca.getIdMarca(), marca.getDadosMarca());
     this.idModelo = idModelo;

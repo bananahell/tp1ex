@@ -2,9 +2,6 @@ package ex1.part1;
 
 public class _MainClass {
 
-  public static final int SEM_MARCA = -1;
-  public static final int SEM_MODELO = -2;
-
   public static Marca chevrolet = new Marca(0, "A vida e assim");
   public static Modelo corsa = new Modelo(100, "Meu corsinha eu nao viro", 4, _MainClass.chevrolet);
   public static Modelo celta = new Modelo(101, "o ceuta zul", 4, _MainClass.chevrolet);

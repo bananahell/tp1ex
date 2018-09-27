@@ -11,18 +11,6 @@ public class Automovel extends Modelo {
   private String chassi;
   private double valorDeLocacao;
 
-  public Automovel(String numeroDaPlaca) {
-    super();
-    this.numeroDaPlaca = numeroDaPlaca;
-    this.cor = new String();
-    this.ano = -1;
-    this.tipoDeCombustivel = new String();
-    this.quilometragem = -1;
-    this.renavam = -1;
-    this.chassi = new String();
-    this.valorDeLocacao = -1;
-  }
-
   public Automovel(String numeroDaPlaca, String cor, int ano, String tipoDeCombustivel,
       double quilometragem, int renavam, String chassi, double valorDeLocacao, Modelo modelo) {
     super(modelo.getIdModelo(), modelo.getDadosModelo(), modelo.getNumeroDePortas(),
