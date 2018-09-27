@@ -8,7 +8,7 @@ public class View {
 
   private static View instancia;
   private boolean aindaFuncionando;
-  private int cpfAtivo;
+  private Cliente clienteAtivo;
 
   private View() {
     this.aindaFuncionando = true;
@@ -24,8 +24,10 @@ public class View {
   public void run() {
     while (this.aindaFuncionando) {
       this.signUpLogIn();
-      if (this.cpfAtivo == 123) {
+      if (this.clienteAtivo.getCpf() == _MainClass.CPF_ADMIN) {
         this.adminControle();
+      } else {
+        this.clienteControle();
       }
     }
   }
@@ -55,7 +57,7 @@ public class View {
             if (!cliente.getSenha().equals(senhaDada)) {
               System.err.println("Senha incorreta!");
             } else {
-              this.cpfAtivo = cpfDado;
+              this.clienteAtivo = cliente;
               notLoggedIn = false;
             }
           } catch (Exception e) {
@@ -75,8 +77,129 @@ public class View {
 
   }
 
+  private void clienteControle() {
+    Scanner scanner = new Scanner(System.in);
+    boolean aindaCliente = true;
+    System.out.println("Olá, " + this.clienteAtivo.getNome() + "!");
+    System.out.println();
+    while (aindaCliente && this.aindaFuncionando) {
+      System.out.println("Escolha com o que quer mexer agora:");
+      System.out.println("1 - Locar um automóvel!");
+      System.out.println("2 - Mexer com o cadastro");
+      System.out.println("3 - Voltar para login");
+      System.out.println("0 - Sair");
+      System.out.println();
+      switch (scanner.nextLine()) {
+        case "1":
+          this.clienteLocacao();
+          break;
+        case "2":
+          this.clienteCadastro();
+          break;
+        case "3":
+          this.clienteAtivo = null;
+          aindaCliente = false;
+          break;
+        case "0":
+          this.aindaFuncionando = false;
+          break;
+        default:
+          System.out.println("Por favor, escolha 1, 2, 3 ou 0.");
+      }
+    }
+  }
+
+  private void clienteLocacao() {
+
+  }
+
+  private void clienteCadastro() {
+
+    Scanner scanner = new Scanner(System.in);
+    boolean aindaCadastro = true;
+
+    while (aindaCadastro) {
+      System.out.println();
+      System.out.println("1 - Ver informações do cadastro");
+      System.out.println("2 - Editar informações");
+      System.out.println("3 - Deletar cadastro");
+      System.out.println("4 - Voltar para controle");
+      System.out.println();
+      switch (scanner.nextLine()) {
+        case "1":
+          System.out.println(this.clienteAtivo.toString());
+          break;
+        case "2": // TODO
+/*          int cpf;
+          String nome;
+          String senha;
+          ArrayList<String> telefones = new ArrayList<>();
+          boolean maisTelefone = true;
+          System.out.println("Digite as informações do cliente");
+          System.out.println("CPF (só números):");
+          System.out.println();
+          cpf = Integer.valueOf(scanner.nextLine()).intValue();
+          System.out.println("Senha:");
+          System.out.println();
+          senha = scanner.nextLine();
+          System.out.println("Nome:");
+          System.out.println();
+          nome = scanner.nextLine();
+          System.out.println(
+              "Telefones (mande quantos telefones quiser e aperte Enter com uma entrada vazia para terminar):");
+          while (maisTelefone) {
+            String telefone = scanner.nextLine();
+            if (telefone.isEmpty()) {
+              maisTelefone = false;
+            } else {
+              telefones.add(telefone);
+            }
+          }
+          Cliente cliente = new Cliente(cpf, senha, nome, telefones);
+          Locadora.addCliente(cliente);
+          System.out.println("Cliente criado com sucesso!");
+          System.out.println();*/
+          break;
+        case "3":
+          String resposta;
+          boolean naoTerminouDelete = true;
+          try {
+            System.out.println("Você tem certeza de que você quer deletar seu cadastro?");
+            System.out.println(this.clienteAtivo.toString());
+            System.out.println("[S|N]");
+            System.out.println();
+            while (naoTerminouDelete) {
+              resposta = scanner.nextLine();
+              if ((resposta.equals("S")) || (resposta.equals("s"))) {
+                Locadora.deleteCliente(this.clienteAtivo.getCpf());
+                System.out.println("Cliente deletado com sucesso!");
+                System.out.println();
+                naoTerminouDelete = false;
+              } else if ((resposta.equals("N")) || (resposta.equals("n"))) {
+                System.out.println("OK");
+                System.out.println();
+                naoTerminouDelete = false;
+              } else {
+                System.out.println("Escolha 'S' para sim ou 'N' para não:");
+                System.out.println();
+              }
+            }
+          } catch (Exception e) {
+            System.err.println(e.getMessage());
+          }
+          break;
+        case "4":
+          aindaCadastro = false;
+          break;
+        default:
+          System.out.println("Por favor, escolha 1, 2, 3 ou 4.");
+
+      }
+    }
+  }
+
   private void adminControle() {
-    Scanner scanner2 = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     boolean aindaAdmin = true;
     System.out.println("Olá, admin!");
     System.out.println();
@@ -89,7 +212,7 @@ public class View {
       System.out.println("5 - Voltar para login");
       System.out.println("0 - Sair");
       System.out.println();
-      switch (scanner2.nextLine()) {
+      switch (scanner.nextLine()) {
         case "1":
           this.adminAgencia();
           break;
@@ -103,7 +226,7 @@ public class View {
           this.adminLocacao();
           break;
         case "5":
-          this.cpfAtivo = -1;
+          this.clienteAtivo = null;
           aindaAdmin = false;
           break;
         case "0":
@@ -164,7 +287,7 @@ public class View {
             System.out.println("Digite o código da agência a ser deletada:");
             System.out.println();
             codigoDado = Integer.valueOf(scanner.nextLine()).intValue();
-            System.out.println("Você tem certeza de que você quer deletar:");
+            System.out.println("Você tem certeza de que você quer deletar essa agência?");
             System.out.println(Locadora.getAgencia(codigoDado).toString());
             System.out.println("[S|N]");
             System.out.println();
@@ -279,7 +402,7 @@ public class View {
             System.out.println("Digite a placa do automóvel a ser deletado:");
             System.out.println();
             placaDada = scanner.nextLine();
-            System.out.println("Você tem certeza de que você quer deletar:");
+            System.out.println("Você tem certeza de que você quer deletar esse automóvel?");
             System.out.println(Locadora.getAutomovel(placaDada).toString());
             System.out.println("[S|N]");
             System.out.println();
@@ -375,7 +498,11 @@ public class View {
             System.out.println("Digite o CPF do cliente a ser deletado:");
             System.out.println();
             cpfDado = Integer.valueOf(scanner.nextLine()).intValue();
-            System.out.println("Você tem certeza de que você quer deletar:");
+            if (cpfDado == _MainClass.CPF_ADMIN) {
+              System.err.println("Não apague o admin do sistema!!!");
+              break;
+            }
+            System.out.println("Você tem certeza de que você quer deletar esse cliente?");
             System.out.println(Locadora.getCliente(cpfDado).toString());
             System.out.println("[S|N]");
             System.out.println();

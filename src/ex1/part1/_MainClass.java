@@ -54,6 +54,8 @@ public class _MainClass {
   public static Modelo march = new Modelo(118, "March", "abril", 4, _MainClass.nissan);
   public static Modelo versa = new Modelo(119, "Versa", "proso", 4, _MainClass.nissan);
 
+  public static int CPF_ADMIN = 123;
+
   public static void main(String[] args) {
 
     _MainClass.marcas.add(_MainClass.chevrolet);
@@ -88,7 +90,7 @@ public class _MainClass {
     _MainClass.modelos.add(_MainClass.march);
     _MainClass.modelos.add(_MainClass.versa);
 
-    Cliente admin = new Cliente(123, "123", "123", new ArrayList<>());
+    Cliente admin = new Cliente(_MainClass.CPF_ADMIN, "admin", "admin", new ArrayList<>());
     Locadora.addCliente(admin);
 
     View view = View.getInstancia();
