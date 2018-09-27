@@ -6,7 +6,6 @@ public class Automovel extends Modelo {
   private String cor;
   private int ano;
   private String tipoDeCombustivel;
-  private int numeroDePortas;
   private double quilometragem;
   private int renavam;
   private String chassi;
@@ -18,7 +17,6 @@ public class Automovel extends Modelo {
     this.cor = new String();
     this.ano = -1;
     this.tipoDeCombustivel = new String();
-    this.numeroDePortas = -1;
     this.quilometragem = -1;
     this.renavam = -1;
     this.chassi = new String();
@@ -26,14 +24,13 @@ public class Automovel extends Modelo {
   }
 
   public Automovel(String numeroDaPlaca, String cor, int ano, String tipoDeCombustivel,
-      int numeroDePortas, double quilometragem, int renavam, String chassi, double valorDeLocacao,
-      Modelo modelo) {
-    super(modelo.getIdModelo(), modelo.getDadosModelo(), modelo.getMarca());
+      double quilometragem, int renavam, String chassi, double valorDeLocacao, Modelo modelo) {
+    super(modelo.getIdModelo(), modelo.getDadosModelo(), modelo.getNumeroDePortas(),
+        modelo.getMarca());
     this.numeroDaPlaca = numeroDaPlaca;
     this.cor = cor;
     this.ano = ano;
     this.tipoDeCombustivel = tipoDeCombustivel;
-    this.numeroDePortas = numeroDePortas;
     this.quilometragem = quilometragem;
     this.renavam = renavam;
     this.chassi = chassi;
@@ -70,14 +67,6 @@ public class Automovel extends Modelo {
 
   public void setTipoDeCombustível(String tipoDeCombustivel) {
     this.tipoDeCombustivel = tipoDeCombustivel;
-  }
-
-  public int getNumeroDePortas() {
-    return this.numeroDePortas;
-  }
-
-  public void setNumeroDePortas(int numeroDePortas) {
-    this.numeroDePortas = numeroDePortas;
   }
 
   public double getQuilometragem() {
