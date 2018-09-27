@@ -8,12 +8,27 @@ public class Cliente {
   private int cpf;
   private String senha;
   private String nome;
-  private ArrayList<Integer> telefone;
+  private ArrayList<String> telefones;
 
-  public Cliente(int cpf, String nome, ArrayList<Integer> telefone) {
+  public Cliente(int cpf, String senha, String nome, ArrayList<String> telefones) {
     this.cpf = cpf;
+    this.senha = senha;
     this.nome = nome;
-    this.telefone = telefone;
+    this.telefones = telefones;
+  }
+
+  @Override
+  public String toString() {
+    String telefonesCliente = "\nTelefones do cliente:";
+    if (this.telefones.isEmpty()) {
+      telefonesCliente += " vazio";
+    } else {
+      for (String telefone : this.telefones) {
+        telefonesCliente += "\n  ";
+        telefonesCliente += telefone.toString();
+      }
+    }
+    return "CPF: " + this.cpf + "\nNome: " + this.nome + telefonesCliente;
   }
 
   public int getCpf() {
@@ -40,12 +55,12 @@ public class Cliente {
     this.nome = nome;
   }
 
-  public ArrayList<Integer> getTelefone() {
-    return this.telefone;
+  public ArrayList<String> getTelefones() {
+    return this.telefones;
   }
 
-  public void setTelefone(ArrayList<Integer> telefone) {
-    this.telefone = telefone;
+  public void setTelefones(ArrayList<String> telefones) {
+    this.telefones = telefones;
   }
 
 }

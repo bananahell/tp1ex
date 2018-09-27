@@ -32,43 +32,35 @@ public class Locadora {
   }
 
   public static void deleteAgencia(int codAgencia) throws Exception {
-    for (Agencia agencia : Locadora.agencias) {
-      if (agencia.getCodAgencia() == codAgencia) {
-        Locadora.agencias.remove(agencia);
-        return;
-      }
+    try {
+      Locadora.agencias.remove(Locadora.getAgencia(codAgencia));
+    } catch (Exception e) {
+      throw e;
     }
-    throw new Exception();
   }
 
   public static void deleteAutomovel(String placa) throws Exception {
-    for (Automovel automovel : Locadora.automoveis) {
-      if (automovel.getNumeroDaPlaca() == placa) {
-        Locadora.automoveis.remove(automovel);
-        return;
-      }
+    try {
+      Locadora.automoveis.remove(Locadora.getAutomovel(placa));
+    } catch (Exception e) {
+      throw e;
     }
-    throw new Exception();
   }
 
   public static void deleteCliente(int cpf) throws Exception {
-    for (Cliente cliente : Locadora.clientes) {
-      if (cliente.getCpf() == cpf) {
-        Locadora.clientes.remove(cliente);
-        return;
-      }
+    try {
+      Locadora.clientes.remove(Locadora.getCliente(cpf));
+    } catch (Exception e) {
+      throw e;
     }
-    throw new Exception();
   }
 
   public static void deleteLocacao(int idLocacao) throws Exception {
-    for (Locacao locacao : Locadora.locacoes) {
-      if (locacao.getIdLocacao() == idLocacao) {
-        Locadora.locacoes.remove(locacao);
-        return;
-      }
+    try {
+      Locadora.locacoes.remove(Locadora.getLocacao(idLocacao));
+    } catch (Exception e) {
+      throw e;
     }
-    throw new Exception();
   }
 
   public static Agencia getAgencia(int codAgencia) throws Exception {
@@ -77,7 +69,7 @@ public class Locadora {
         return agencia;
       }
     }
-    throw new Exception();
+    throw new Exception("Agência não encontrada!");
   }
 
   public static Automovel getAutomovel(String placa) throws Exception {
@@ -86,7 +78,7 @@ public class Locadora {
         return automovel;
       }
     }
-    throw new Exception();
+    throw new Exception("Automovel não encontrado!");
   }
 
   public static Cliente getCliente(int cpf) throws Exception {
@@ -95,7 +87,7 @@ public class Locadora {
         return cliente;
       }
     }
-    throw new Exception();
+    throw new Exception("Cliente não encontrado!");
   }
 
   public static Locacao getLocacao(int idLocacao) throws Exception {
@@ -104,7 +96,7 @@ public class Locadora {
         return locacao;
       }
     }
-    throw new Exception();
+    throw new Exception("Locação não encontrada!");
   }
 
 }

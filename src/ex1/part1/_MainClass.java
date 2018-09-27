@@ -1,5 +1,8 @@
 package ex1.part1;
 
+import java.util.ArrayList;
+
+
 public class _MainClass {
 
   public static Marca chevrolet = new Marca(0, "A vida e assim");
@@ -44,18 +47,12 @@ public class _MainClass {
 
   public static void main(String[] args) {
 
-    Automovel meuPrimeiroCarro = new Automovel("xoxo420", "cor de pele", 2018, "fogo do meu rabo",
-        0, 843957, "chaaaassiiiiii", 399, _MainClass.corsa);
+    Cliente admin = new Cliente(123, "123", "123", new ArrayList<>());
+    Locadora.addCliente(admin);
 
-    System.out.println("Placa: " + meuPrimeiroCarro.getNumeroDaPlaca() + "\nCor: " +
-        meuPrimeiroCarro.getCor() + "\nAno: " + meuPrimeiroCarro.getAno() + "\nCombustível: " +
-        meuPrimeiroCarro.getTipoDeCombustivel() + "\nPortas: " +
-        meuPrimeiroCarro.getNumeroDePortas() + "\nQuilometragem: " +
-        meuPrimeiroCarro.getQuilometragem() + "\nRenavam: " + meuPrimeiroCarro.getRenavam() +
-        "\nChassi: " + meuPrimeiroCarro.getChassi() + "\nValor de" + " Locacao: " +
-        meuPrimeiroCarro.getValorDeLocacao() + "\nID modelo: " + meuPrimeiroCarro.getIdModelo() +
-        "\nDados modelo: " + meuPrimeiroCarro.getDadosModelo() + "\nID marca: " +
-        meuPrimeiroCarro.getIdMarca() + "\nDados marca: " + meuPrimeiroCarro.getDadosMarca());
+    View view = View.getInstancia();
+
+    view.run();
 
     System.out.println("ayyyy lmao");
 
