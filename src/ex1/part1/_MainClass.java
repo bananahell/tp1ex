@@ -60,7 +60,7 @@ public class _MainClass {
         "\nDados modelo: " + meuPrimeiroCarro.getDadosModelo() + "\nID marca: " +
         meuPrimeiroCarro.getIdMarca() + "\nDados marca: " + meuPrimeiroCarro.getDadosMarca());
 
-    System.out.println("hue");
+    System.out.println("ayyyy lmao");
 
   }
 
