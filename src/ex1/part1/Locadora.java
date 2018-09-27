@@ -63,6 +63,42 @@ public class Locadora {
     }
   }
 
+  public static boolean existeAgencia(int codAgencia) {
+    try {
+      Locadora.getAgencia(codAgencia);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public static boolean existeAutomovel(String placa) {
+    try {
+      Locadora.getAutomovel(placa);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public static boolean existeCliente(int cpf) {
+    try {
+      Locadora.getCliente(cpf);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public static boolean existeLocacao(int idLocacao) {
+    try {
+      Locadora.getLocacao(idLocacao);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
   public static Agencia getAgencia(int codAgencia) throws Exception {
     for (Agencia agencia : Locadora.agencias) {
       if (agencia.getCodAgencia() == codAgencia) {
@@ -74,7 +110,7 @@ public class Locadora {
 
   public static Automovel getAutomovel(String placa) throws Exception {
     for (Automovel automovel : Locadora.automoveis) {
-      if (automovel.getNumeroDaPlaca() == placa) {
+      if (automovel.getNumeroDaPlaca().equals(placa)) {
         return automovel;
       }
     }

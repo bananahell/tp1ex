@@ -13,8 +13,8 @@ public class Automovel extends Modelo {
 
   public Automovel(String numeroDaPlaca, String cor, int ano, String tipoDeCombustivel,
       double quilometragem, int renavam, String chassi, double valorDeLocacao, Modelo modelo) {
-    super(modelo.getIdModelo(), modelo.getDadosModelo(), modelo.getNumeroDePortas(),
-        modelo.getMarca());
+    super(modelo.getIdModelo(), modelo.getNomeModelo(), modelo.getDadosModelo(),
+        modelo.getNumeroDePortas(), modelo.getMarca());
     this.numeroDaPlaca = numeroDaPlaca;
     this.cor = cor;
     this.ano = ano;
@@ -23,6 +23,15 @@ public class Automovel extends Modelo {
     this.renavam = renavam;
     this.chassi = chassi;
     this.valorDeLocacao = valorDeLocacao;
+  }
+
+  @Override
+  public String toString() {
+    return "Placa: " + this.numeroDaPlaca + "\nCor: " + this.cor + "\nAno: " + this.ano +
+        "\nTipo de combustível: " + this.tipoDeCombustivel + "\nQuilometragem: " +
+        this.quilometragem + "\nRenavam: " + this.renavam + "\nChassi: " + this.chassi +
+        "\nValor de locação: " + this.valorDeLocacao + "\nMarca: " + this.getNomeMarca() +
+        "\nModelo: " + this.getNomeModelo() + "\nNúmero de portas: " + this.getNumeroDePortas();
   }
 
   public String getNumeroDaPlaca() {

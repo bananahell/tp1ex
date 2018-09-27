@@ -12,6 +12,7 @@ public class Agencia {
   public Agencia(int codAgencia, String local) {
     this.codAgencia = codAgencia;
     this.local = local;
+    this.automoveisPlacas = new ArrayList<>();
   }
 
   @Override

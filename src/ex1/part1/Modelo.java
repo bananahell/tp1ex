@@ -3,12 +3,15 @@ package ex1.part1;
 public class Modelo extends Marca {
 
   private int idModelo;
+  private String nomeModelo;
   private String dadosModelo;
   private int numeroDePortas;
 
-  public Modelo(int idModelo, String dadosModelo, int numeroDePortas, Marca marca) {
-    super(marca.getIdMarca(), marca.getDadosMarca());
+  public Modelo(int idModelo, String nomeModelo, String dadosModelo, int numeroDePortas,
+      Marca marca) {
+    super(marca.getIdMarca(), marca.getNomeMarca(), marca.getDadosMarca());
     this.idModelo = idModelo;
+    this.nomeModelo = nomeModelo;
     this.dadosModelo = dadosModelo;
     this.numeroDePortas = numeroDePortas;
   }
@@ -18,7 +21,15 @@ public class Modelo extends Marca {
   }
 
   public void setIdModelo(int idModelo) {
-    this.idModelo = idModelo; // TODO procurar se id ta disponivel
+    this.idModelo = idModelo;
+  }
+
+  public String getNomeModelo() {
+    return this.nomeModelo;
+  }
+
+  public void setNomeModelo(String nomeModelo) {
+    this.nomeModelo = nomeModelo;
   }
 
   public String getDadosModelo() {
