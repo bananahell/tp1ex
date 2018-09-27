@@ -66,9 +66,9 @@ public class Locadora {
     }
     throw new Exception();
   }
-  
+
   public static void deleteAutomovel(String placa) throws Exception {
-    Automovel automovel = getAutomovel(placa);
+    Automovel automovel = Locadora.getAutomovel(placa);
   }
 
 }
