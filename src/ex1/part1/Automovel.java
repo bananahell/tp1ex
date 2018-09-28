@@ -10,6 +10,7 @@ public class Automovel extends Modelo {
   private int renavam;
   private String chassi;
   private double valorDeLocacao;
+  private boolean locado;
 
   public Automovel(String numeroDaPlaca, String cor, int ano, String tipoDeCombustivel,
       double quilometragem, int renavam, String chassi, double valorDeLocacao, Modelo modelo) {
@@ -23,6 +24,7 @@ public class Automovel extends Modelo {
     this.renavam = renavam;
     this.chassi = chassi;
     this.valorDeLocacao = valorDeLocacao;
+    this.setLocado(false);
   }
 
   @Override
@@ -100,6 +102,14 @@ public class Automovel extends Modelo {
 
   public Modelo getModelo() {
     return this;
+  }
+
+  public boolean isLocado() {
+    return this.locado;
+  }
+
+  public void setLocado(boolean locado) {
+    this.locado = locado;
   }
 
 }

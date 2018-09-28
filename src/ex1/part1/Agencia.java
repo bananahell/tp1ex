@@ -7,7 +7,7 @@ public class Agencia {
 
   private int codAgencia;
   private String local;
-  private ArrayList<Integer> automoveisPlacas;
+  private ArrayList<String> automoveisPlacas;
 
   public Agencia(int codAgencia, String local) {
     this.codAgencia = codAgencia;
@@ -21,7 +21,7 @@ public class Agencia {
     if (this.automoveisPlacas.isEmpty()) {
       carros += " vazio";
     } else {
-      for (Integer placa : this.automoveisPlacas) {
+      for (String placa : this.automoveisPlacas) {
         carros += "\n  ";
         carros += placa.toString();
       }
@@ -45,12 +45,25 @@ public class Agencia {
     this.local = local;
   }
 
-  public ArrayList<Integer> getAutomoveisPlacas() {
+  public ArrayList<String> getAutomoveisPlacas() {
     return this.automoveisPlacas;
   }
 
-  public void setAutomoveis(ArrayList<Integer> automoveisPlacas) {
+  public void setAutomoveis(ArrayList<String> automoveisPlacas) {
     this.automoveisPlacas = automoveisPlacas;
+  }
+
+  public void adicionaAutomovel(String placa) {
+    this.automoveisPlacas.add(placa);
+  }
+
+  public void tiraAutomovel(String placa) {
+    for (String placaProcura : this.automoveisPlacas) {
+      if (placa.equals(placaProcura)) {
+        this.automoveisPlacas.remove(placaProcura);
+        break;
+      }
+    }
   }
 
 }

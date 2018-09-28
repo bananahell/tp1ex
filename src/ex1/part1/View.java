@@ -1,5 +1,6 @@
 package ex1.part1;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -85,8 +86,9 @@ public class View {
     while (aindaCliente && this.aindaFuncionando) {
       System.out.println("Escolha com o que quer mexer agora:");
       System.out.println("1 - Locar um automóvel!");
-      System.out.println("2 - Mexer com o cadastro");
-      System.out.println("3 - Voltar para login");
+      System.out.println("2 - Devolver um automóvel");
+      System.out.println("3 - Mexer com o cadastro");
+      System.out.println("4 - Voltar para login");
       System.out.println("0 - Sair");
       System.out.println();
       switch (scanner.nextLine()) {
@@ -94,9 +96,12 @@ public class View {
           this.clienteLocacao();
           break;
         case "2":
-          this.clienteCadastro();
+          this.clienteDevolucao();
           break;
         case "3":
+          this.clienteCadastro();
+          break;
+        case "4":
           this.clienteAtivo = null;
           aindaCliente = false;
           break;
@@ -104,13 +109,89 @@ public class View {
           this.aindaFuncionando = false;
           break;
         default:
-          System.out.println("Por favor, escolha 1, 2, 3 ou 0.");
+          System.out.println("Por favor, escolha 1, 2, 3, 4 ou 0.");
       }
     }
   }
 
   private void clienteLocacao() {
 
+    Scanner scanner = new Scanner(System.in);
+    int escolhaAgencia;
+    String escolhaPlaca;
+    Agencia agencia;
+    Automovel automovel;
+    Locacao locacao;
+    try {
+      System.out.println("Escolha uma das agências pelo seu código de agência:\n");
+      System.out.println(Locadora.toStringAgencias());
+      escolhaAgencia = Integer.valueOf(scanner.nextLine()).intValue();
+      agencia = Locadora.getAgencia(escolhaAgencia);
+      System.out.println("Escolha um dos carros disponíveis na agência:");
+      for (String placa : agencia.getAutomoveisPlacas()) {
+        automovel = Locadora.getAutomovel(placa);
+        System.out.println(
+            "\nPlaca: " + automovel.getNumeroDaPlaca() + "\nModelo: " + automovel.getDadosModelo());
+      }
+      escolhaPlaca = scanner.nextLine();
+
+      System.out.println("Escolha entre: ");
+      System.out.println("1 - Locação por diária\n2 - Locação por tempo");
+
+      switch (scanner.nextLine()) {
+        case "1":
+          int dias;
+          int agenciaDevolvida;
+          System.out.println("Insira quantos dias você deseja nessa diária:");
+          dias = Integer.valueOf(scanner.nextLine()).intValue();
+          System.out.println("Dê o código da agência em que você vai devolver o automóvel:");
+          agenciaDevolvida = Integer.valueOf(scanner.nextLine()).intValue();
+          locacao = new Locacao(dias, escolhaAgencia, agenciaDevolvida, this.clienteAtivo.getCpf(),
+              Locacao.LOCACAO_DIARIA, escolhaPlaca);
+          Locadora.getAgencia(escolhaAgencia).tiraAutomovel(escolhaPlaca);
+          Locadora.getAgencia(agenciaDevolvida).adicionaAutomovel(escolhaPlaca);
+          Locadora.addLocacao(locacao);
+          break;
+        case "2":
+          locacao = new Locacao(escolhaAgencia, this.clienteAtivo.getCpf(), Locacao.LOCACAO_TEMPO,
+              escolhaPlaca);
+          Locadora.getAutomovel(escolhaPlaca).setLocado(true);
+          Locadora.getAgencia(escolhaAgencia).tiraAutomovel(escolhaPlaca);
+          Locadora.addLocacao(locacao);
+          break;
+        default:
+      }
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+
+  }
+
+  private void clienteDevolucao() {
+    Scanner scanner = new Scanner(System.in);
+    String placa;
+    Locacao locacao;
+    int agenciaDevolver;
+    try {
+      System.out.println("Informe a placa do automóvel a ser devolvido:");
+      placa = scanner.nextLine();
+      if (Locadora.getAutomovel(placa).isLocado()) {
+        System.out.println("Informe o código da agência para qual você vai devolver o automóvel:");
+        System.out.println(Locadora.toStringAgencias());
+        agenciaDevolver = Integer.valueOf(scanner.nextLine()).intValue();
+        if (!Locadora.existeAgencia(agenciaDevolver)) {
+          System.err.println("Escolha uma das agências apresentadas!");
+        } else {
+          locacao = Locadora.getUltimaLocacaoNoCpfDoAutomovel(this.clienteAtivo.getCpf(), placa);
+          locacao.setDataHoraDevolvido(LocalDateTime.now());
+          Locadora.getAutomovel(placa).setLocado(false);
+          locacao.setAgenciaDevolvida(agenciaDevolver);
+        }
+      }
+    } catch (Exception e) {
+      System.err.println(e.getMessage());
+    }
   }
 
   private void clienteCadastro() {
@@ -130,35 +211,28 @@ public class View {
           System.out.println(this.clienteAtivo.toString());
           break;
         case "2": // TODO
-/*          int cpf;
-          String nome;
-          String senha;
-          ArrayList<String> telefones = new ArrayList<>();
-          boolean maisTelefone = true;
-          System.out.println("Digite as informações do cliente");
-          System.out.println("CPF (só números):");
-          System.out.println();
-          cpf = Integer.valueOf(scanner.nextLine()).intValue();
-          System.out.println("Senha:");
-          System.out.println();
-          senha = scanner.nextLine();
-          System.out.println("Nome:");
-          System.out.println();
-          nome = scanner.nextLine();
-          System.out.println(
-              "Telefones (mande quantos telefones quiser e aperte Enter com uma entrada vazia para terminar):");
-          while (maisTelefone) {
-            String telefone = scanner.nextLine();
-            if (telefone.isEmpty()) {
-              maisTelefone = false;
-            } else {
-              telefones.add(telefone);
-            }
-          }
-          Cliente cliente = new Cliente(cpf, senha, nome, telefones);
-          Locadora.addCliente(cliente);
-          System.out.println("Cliente criado com sucesso!");
-          System.out.println();*/
+          System.out.println("Em construção!");
+          /*
+           * int cpf; String nome; String senha; ArrayList<String>
+           * telefones = new ArrayList<>(); boolean maisTelefone =
+           * true;
+           * System.out.println("Digite as informações do cliente");
+           * System.out.println("CPF (só números):");
+           * System.out.println(); cpf =
+           * Integer.valueOf(scanner.nextLine()).intValue();
+           * System.out.println("Senha:"); System.out.println(); senha
+           * = scanner.nextLine(); System.out.println("Nome:");
+           * System.out.println(); nome = scanner.nextLine();
+           * System.out.println(
+           * "Telefones (mande quantos telefones quiser e aperte Enter com uma entrada vazia para terminar):"
+           * ); while (maisTelefone) { String telefone =
+           * scanner.nextLine(); if (telefone.isEmpty()) {
+           * maisTelefone = false; } else { telefones.add(telefone); }
+           * } Cliente cliente = new Cliente(cpf, senha, nome,
+           * telefones); Locadora.addCliente(cliente);
+           * System.out.println("Cliente criado com sucesso!");
+           * System.out.println();
+           */
           break;
         case "3":
           String resposta;

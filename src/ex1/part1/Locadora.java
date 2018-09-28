@@ -15,6 +15,17 @@ public class Locadora {
         : Locadora.locacoes.get(Locadora.locacoes.size() - 1).getIdLocacao();
   }
 
+  public static Locacao getUltimaLocacaoNoCpfDoAutomovel(int cpf, String placa) throws Exception {
+    for (int i = Locadora.locacoes.size() - 1; i > -1; i--) {
+      if ((Locadora.locacoes.get(i).getCpf() == cpf) &&
+          placa.equals(Locadora.locacoes.get(i).getPlaca()) &&
+          (Locadora.locacoes.get(i).getDataHoraDevolvido() == null)) {
+        return Locadora.locacoes.get(i);
+      }
+    }
+    throw new Exception("O automóvel especificado não está sendo locado pelo cpf dado no momento!");
+  }
+
   public static void addAgencia(Agencia agencia) {
     Locadora.agencias.add(agencia);
   }
@@ -68,6 +79,7 @@ public class Locadora {
       Locadora.getAgencia(codAgencia);
       return true;
     } catch (Exception e) {
+      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -77,6 +89,7 @@ public class Locadora {
       Locadora.getAutomovel(placa);
       return true;
     } catch (Exception e) {
+      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -86,6 +99,7 @@ public class Locadora {
       Locadora.getCliente(cpf);
       return true;
     } catch (Exception e) {
+      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -95,6 +109,7 @@ public class Locadora {
       Locadora.getLocacao(idLocacao);
       return true;
     } catch (Exception e) {
+      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -133,6 +148,18 @@ public class Locadora {
       }
     }
     throw new Exception("Locação não encontrada!");
+  }
+
+  public static String toStringAgencias() {
+    String toStringAgencias = "Agências:";
+    if (Locadora.agencias.isEmpty()) {
+      return toStringAgencias + "vazio";
+    }
+    for (Agencia agencia : Locadora.agencias) {
+      toStringAgencias +=
+          "\nCódigo da agência: " + agencia.getCodAgencia() + "\nLocal: " + agencia.getLocal();
+    }
+    return toStringAgencias;
   }
 
 }

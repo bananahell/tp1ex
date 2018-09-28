@@ -1,72 +1,100 @@
 package ex1.part1;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 public class Locacao {
 
+  public static int LOCACAO_DIARIA = 1;
+  public static int LOCACAO_TEMPO = 2;
+
   private int idLocacao;
-  private Date dataHoraLocado;
-  private Date dataHoraDevolvido;
+  private LocalDateTime dataHoraLocado;
+  private LocalDateTime dataHoraDevolvido;
+  private int dias;
   private int agenciaLocada;
   private int agenciaDevolvida;
   private int cpf;
-  private String tipo;
+  private int tipo;
   private double valor;
   private String placa;
 
-  public Locacao(Date dataHoraLocado, int agenciaLocada, int cpf, String tipo, double valor,
-      String placa) {
+  public Locacao(int agenciaLocada, int cpf, int tipo, String placa) {
     this.idLocacao = Locadora.getUltimaLocacao() + 1;
-    this.dataHoraLocado = dataHoraLocado;
-    this.dataHoraDevolvido = new Date();
+    this.dataHoraLocado = LocalDateTime.now();
+    this.dataHoraDevolvido = null;
     this.agenciaLocada = agenciaLocada;
-    this.agenciaDevolvida = -1;
     this.cpf = cpf;
     this.tipo = tipo;
-    this.valor = valor;
     this.placa = placa;
   }
 
-  public Locacao(Date dataHoraLocado, Date dataHoraDevolvido, int agenciaLocada,
-      int agenciaDevolvida, int cpf, String tipo, double valor, String placa) {
+  public Locacao(int dias, int agenciaLocada, int agenciaDevolvida, int cpf, int tipo,
+      String placa) {
     this.idLocacao = Locadora.getUltimaLocacao() + 1;
-    this.dataHoraLocado = dataHoraLocado;
-    this.dataHoraDevolvido = dataHoraDevolvido;
+    this.dataHoraLocado = LocalDateTime.now();
+    this.dias = dias;
+    this.dataHoraDevolvido = LocalDateTime.from(this.dataHoraLocado).plusDays(dias);
     this.agenciaLocada = agenciaLocada;
     this.agenciaDevolvida = agenciaDevolvida;
     this.cpf = cpf;
     this.tipo = tipo;
-    this.valor = valor;
     this.placa = placa;
+    this.valor = this.calculaPreco();
   }
 
-  public void calculaPreco() {
-    System.out.println(this.cpf); // TODO
+  public double calculaPreco() {
+    if (this.dataHoraDevolvido == null) { // Locação a ser devolvida ainda
+      try {
+        this.dataHoraDevolvido = LocalDateTime.now();
+        int tempo = this.dataHoraDevolvido.compareTo(this.dataHoraLocado);
+        // TODO aplica-se aqui a regra de negócio. definir o preço
+        // aqui
+        this.valor = tempo * Locadora.getAutomovel(this.placa).getValorDeLocacao();
+      } catch (Exception e) {
+        System.err.println(e.getMessage());
+        System.err.println("Deu problema ao calcular o preço!");
+      }
+    } else { // Locação por diária
+      try {
+        this.dataHoraDevolvido = this.dataHoraLocado.plusDays(this.dias);
+        // TODO aplica-se aqui a regra de negócio. definir o preço
+        // aqui
+        this.valor = this.dias * Locadora.getAutomovel(this.placa).getValorDeLocacao();
+      } catch (Exception e) {
+        System.err.println(e.getMessage());
+        System.err.println("Deu problema ao calcular o preço!");
+      }
+    }
+    return this.valor;
   }
 
   public int getIdLocacao() {
     return this.idLocacao;
   }
 
-  public void setIdLocacao(int idLocacao) {
-    this.idLocacao = idLocacao; // TODO procurar se id ta disponivel
-  }
-
-  public Date getDataHoraLocado() {
+  public LocalDateTime getDataHoraLocado() {
     return this.dataHoraLocado;
   }
 
-  public void setDataHoraLocado(Date dataHoraLocado) {
+  public void setDataHoraLocado(LocalDateTime dataHoraLocado) {
     this.dataHoraLocado = dataHoraLocado;
   }
 
-  public Date getDataHoraDevolvido() {
+  public LocalDateTime getDataHoraDevolvido() {
     return this.dataHoraDevolvido;
   }
 
-  public void setDataHoraDevolvido(Date dataHoraDevolvido) {
+  public void setDataHoraDevolvido(LocalDateTime dataHoraDevolvido) {
     this.dataHoraDevolvido = dataHoraDevolvido;
+  }
+
+  public int getDias() {
+    return this.dias;
+  }
+
+  public void setDias(int dias) {
+    this.dias = dias;
   }
 
   public int getAgenciaLocada() {
@@ -93,11 +121,11 @@ public class Locacao {
     this.cpf = cpf;
   }
 
-  public String getTipo() {
+  public int getTipo() {
     return this.tipo;
   }
 
-  public void setTipo(String tipo) {
+  public void setTipo(int tipo) {
     this.tipo = tipo;
   }
 
