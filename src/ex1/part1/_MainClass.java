@@ -90,14 +90,55 @@ public class _MainClass {
     _MainClass.modelos.add(_MainClass.march);
     _MainClass.modelos.add(_MainClass.versa);
 
-    Cliente admin = new Cliente(_MainClass.CPF_ADMIN, "admin", "admin", new ArrayList<>());
-    Locadora.addCliente(admin);
+    try {
+
+      // ADMIN
+      Locadora.addCliente(new Cliente(_MainClass.CPF_ADMIN, "admin", "admin", new ArrayList<>()));
+
+      // automóveis
+      Locadora.addAutomovel(new Automovel("XVC-4123", "Preto", 2010, "Gasolina", 0, 99028318047l,
+          "aiuw8322o312o", 80, _MainClass.fox));
+      Locadora.addAutomovel(new Automovel("XPC-7547", "Branco", 2015, "Álcool", 10000, 99575345047l,
+          "39r72f93uf2h3", 200, _MainClass.celta));
+      Locadora.addAutomovel(new Automovel("OVN-3275", "Vermelho", 2015, "Gasolina", 5000,
+          92575474047l, "12389329fff44", 190, _MainClass.capri));
+      Locadora.addAutomovel(new Automovel("JGI-3572", "Vermelho", 2013, "Diesel", 7500,
+          32895726606l, "208tewvnweo82", 50, _MainClass.fox));
+      Locadora.addAutomovel(new Automovel("QWI-1393", "Branco", 2009, "Gasolina", 20000,
+          21486378375l, "23894f23489f3", 70, _MainClass.bronco));
+      Locadora.addAutomovel(new Automovel("VOS-5477", "Preto", 2016, "Álcool", 25000, 38985643678l,
+          "2398thf2349f8", 300, _MainClass.elantra));
+      Locadora.addAutomovel(new Automovel("WOF-5437", "Vermelho", 2003, "Diesel", 0, 39587593466l,
+          "23930329r825f", 130, _MainClass.corolla));
+      Locadora.addAutomovel(new Automovel("QPR-5255", "Branco", 2005, "Diesel", 9000, 23850578346l,
+          "8rf3hf2378f23", 160, _MainClass.corolla));
+
+      // agências
+      Locadora.addAgencia(new Agencia(1, "W3 norte"));
+      Locadora.getAgencia(1).adicionaAutomovel("XVC-4123");
+      Locadora.getAgencia(1).adicionaAutomovel("XPC-7547");
+
+      Locadora.addAgencia(new Agencia(2, "L2 sul"));
+      Locadora.getAgencia(2).adicionaAutomovel("OVN-3275");
+
+      Locadora.addAgencia(new Agencia(3, "Guará"));
+      Locadora.getAgencia(3).adicionaAutomovel("JGI-3572");
+      Locadora.getAgencia(3).adicionaAutomovel("QWI-1393");
+      Locadora.getAgencia(3).adicionaAutomovel("VOS-5477");
+
+      Locadora.addAgencia(new Agencia(4, "Granja do Torto"));
+      Locadora.getAgencia(4).adicionaAutomovel("WOF-5437");
+      Locadora.getAgencia(4).adicionaAutomovel("QPR-5255");
+
+    } catch (Exception e) {
+      System.err.println("Erro na inicialização da main!!!");
+    }
 
     View view = View.getInstancia();
 
     view.run();
-
-    System.out.println("ayyyy lmao");
+    
+    System.out.println("Bye! Have a good tiime!");
 
   }
 

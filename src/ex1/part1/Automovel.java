@@ -7,13 +7,13 @@ public class Automovel extends Modelo {
   private int ano;
   private String tipoDeCombustivel;
   private double quilometragem;
-  private int renavam;
+  private long renavam;
   private String chassi;
   private double valorDeLocacao;
   private boolean locado;
 
   public Automovel(String numeroDaPlaca, String cor, int ano, String tipoDeCombustivel,
-      double quilometragem, int renavam, String chassi, double valorDeLocacao, Modelo modelo) {
+      double quilometragem, long renavam, String chassi, double valorDeLocacao, Modelo modelo) {
     super(modelo.getIdModelo(), modelo.getNomeModelo(), modelo.getDadosModelo(),
         modelo.getNumeroDePortas(), modelo.getMarca());
     this.numeroDaPlaca = numeroDaPlaca;
@@ -24,7 +24,7 @@ public class Automovel extends Modelo {
     this.renavam = renavam;
     this.chassi = chassi;
     this.valorDeLocacao = valorDeLocacao;
-    this.setLocado(false);
+    this.locado = false;
   }
 
   @Override
@@ -76,11 +76,11 @@ public class Automovel extends Modelo {
     this.quilometragem = quilometragem;
   }
 
-  public int getRenavam() {
+  public long getRenavam() {
     return this.renavam;
   }
 
-  public void setRenavam(int renavam) {
+  public void setRenavam(long renavam) {
     this.renavam = renavam;
   }
 
