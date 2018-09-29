@@ -9,6 +9,7 @@ public class View {
 
   private static View instancia;
   private boolean aindaFuncionando;
+  private boolean aindaCliente;
   private Cliente clienteAtivo;
 
   private View() {
@@ -25,10 +26,12 @@ public class View {
   public void run() {
     while (this.aindaFuncionando) {
       this.signUpLogIn();
-      if (this.clienteAtivo.getCpf() == _MainClass.CPF_ADMIN) {
-        this.adminControle();
-      } else {
-        this.clienteControle();
+      if (this.clienteAtivo != null && aindaFuncionando == true) {
+        if (this.clienteAtivo.getCpf() == _MainClass.CPF_ADMIN) {
+          this.adminControle();
+        } else {
+          this.clienteControle();
+        }
       }
     }
   }
@@ -44,15 +47,44 @@ public class View {
       System.out.println("2 - Log in");
       System.out.println("0 - Sair da aplicação");
       System.out.println();
+      int cpfDado;
+      String nomeDado;
+      String senhaDada;
+      ArrayList<String> telefonesDados = new ArrayList<>();
+      Cliente cliente;
       switch (scanner.nextLine()) {
         case "1":
+          boolean maisTelefone = true;
+          System.out.println("CPF: ");
+          cpfDado = Integer.valueOf(scanner.nextLine()).intValue();
+          if (Locadora.existeCliente(cpfDado)) {
+            System.err.println("Este usuário já existe!");
+            break;
+          }
+          System.out.println("Senha: ");
+          senhaDada = scanner.nextLine();
+          System.out.println("Nome: ");
+          nomeDado = scanner.nextLine();
+          System.out.println(
+              "Telefones (mande quantos telefones quiser e aperte Enter com uma entrada vazia para terminar):");
+          while (maisTelefone) {
+            String telefone = scanner.nextLine();
+            if (telefone.isEmpty()) {
+              maisTelefone = false;
+            } else {
+              telefonesDados.add(telefone);
+            }
+          }
+          cliente = new Cliente(cpfDado, senhaDada, nomeDado, telefonesDados);
+          Locadora.addCliente(cliente);
+          this.clienteAtivo = cliente;
+          notLoggedIn = false;
           break;
         case "2":
           System.out.println("CPF: ");
-          int cpfDado = Integer.valueOf(scanner.nextLine()).intValue();
+          cpfDado = Integer.valueOf(scanner.nextLine()).intValue();
           System.out.println("Senha: ");
-          String senhaDada = scanner.nextLine();
-          Cliente cliente;
+          senhaDada = scanner.nextLine();
           try {
             cliente = Locadora.getCliente(cpfDado);
             if (!cliente.getSenha().equals(senhaDada)) {
@@ -80,7 +112,7 @@ public class View {
 
   private void clienteControle() {
     Scanner scanner = new Scanner(System.in);
-    boolean aindaCliente = true;
+    aindaCliente = true;
     System.out.println("Olá, " + this.clienteAtivo.getNome() + "!");
     System.out.println();
     while (aindaCliente && this.aindaFuncionando) {
@@ -249,6 +281,8 @@ public class View {
                 System.out.println("Cliente deletado com sucesso!");
                 System.out.println();
                 naoTerminouDelete = false;
+                aindaCadastro = false;
+                aindaCliente = false;
               } else if ((resposta.equals("N")) || (resposta.equals("n"))) {
                 System.out.println("OK");
                 System.out.println();
@@ -543,6 +577,10 @@ public class View {
           System.out.println("CPF (só números):");
           System.out.println();
           cpf = Integer.valueOf(scanner.nextLine()).intValue();
+          if (Locadora.existeCliente(cpf)) {
+            System.err.println("Cliente com esse cpf já existe!");
+            break;
+          }
           System.out.println("Senha:");
           System.out.println();
           senha = scanner.nextLine();

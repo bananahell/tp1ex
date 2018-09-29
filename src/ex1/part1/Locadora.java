@@ -79,7 +79,6 @@ public class Locadora {
       Locadora.getAgencia(codAgencia);
       return true;
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -89,7 +88,6 @@ public class Locadora {
       Locadora.getAutomovel(placa);
       return true;
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -99,7 +97,6 @@ public class Locadora {
       Locadora.getCliente(cpf);
       return true;
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       return false;
     }
   }
@@ -109,7 +106,6 @@ public class Locadora {
       Locadora.getLocacao(idLocacao);
       return true;
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       return false;
     }
   }
