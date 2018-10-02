@@ -184,6 +184,7 @@ public class View {
               Locacao.LOCACAO_DIARIA, escolhaPlaca);
           Locadora.getAgencia(escolhaAgencia).tiraAutomovel(escolhaPlaca);
           Locadora.getAgencia(agenciaDevolvida).adicionaAutomovel(escolhaPlaca);
+          System.out.println("A locação vai custar: R$" + locacao.getValor());
           Locadora.addLocacao(locacao);
           break;
         case "2":
@@ -222,6 +223,8 @@ public class View {
           locacao.setDataHoraDevolvido(LocalDateTime.now());
           Locadora.getAutomovel(placa).setLocado(false);
           locacao.setAgenciaDevolvida(agenciaDevolver);
+          Locadora.getAgencia(agenciaDevolver).adicionaAutomovel(placa);
+          System.out.println("A locação vai custar: R$" + locacao.calculaPreco());
         }
       }
     } catch (Exception e) {

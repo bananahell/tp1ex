@@ -137,7 +137,7 @@ public class _MainClass {
     View view = View.getInstancia();
 
     view.run();
-    
+
     System.out.println("Bye! Have a good tiime!");
 
   }

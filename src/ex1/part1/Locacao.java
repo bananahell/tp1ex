@@ -44,7 +44,7 @@ public class Locacao {
   }
 
   public double calculaPreco() {
-    if (this.dataHoraDevolvido == null) { // Locação a ser devolvida ainda
+    if (this.tipo == Locacao.LOCACAO_TEMPO) { // Locação a ser devolvida ainda
       try {
         this.dataHoraDevolvido = LocalDateTime.now();
         int tempo = this.dataHoraDevolvido.compareTo(this.dataHoraLocado);
