@@ -1,9 +1,26 @@
 package ex1.part1;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class _MainClass {
+
+  // TODO aqui é decidido se a aplicação vai ser testada em
+  // localhost ou se ela vai usar o servidor remoto
+  // freemysqlhosting.net
+  /*
+   * static final String DATABASE_URL = "jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10264389";
+   * static final String DBUSER = "sql10264389";
+   * static final String DBPASS = "FDNglsrZcA";
+   */
+  // localhost
+
+  static final String DATABASE_URL = "jdbc:mysql://localhost/bd_locadora";
+  static final String DBUSER = "root";
+  static final String DBPASS = "alucard114";
 
   public static ArrayList<Marca> marcas = new ArrayList<>();
   public static ArrayList<Modelo> modelos = new ArrayList<>();
@@ -57,6 +74,33 @@ public class _MainClass {
   public static int CPF_ADMIN = 123;
 
   public static void main(String[] args) {
+
+    Connection conn = null;
+
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      conn = DriverManager.getConnection(_MainClass.DATABASE_URL, _MainClass.DBUSER,
+          _MainClass.DBPASS);
+    } catch (SQLException e) {
+
+      System.out.println("SQLException: " + e.getMessage());
+      System.out.println("SQLState: " + e.getSQLState());
+      System.out.println("VendorError: " + e.getErrorCode());
+      e.printStackTrace();
+
+    } catch (ClassNotFoundException e1) {
+      System.out.println(e1.getMessage());
+      e1.printStackTrace();
+    } finally {
+      if (conn != null) {
+        try {
+          conn.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        conn = null;
+      }
+    }
 
     _MainClass.marcas.add(_MainClass.chevrolet);
     _MainClass.marcas.add(_MainClass.fiat);
