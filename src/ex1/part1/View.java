@@ -1,5 +1,9 @@
 package ex1.part1;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,6 +15,10 @@ public class View {
   private boolean aindaFuncionando;
   private boolean aindaCliente;
   private Cliente clienteAtivo;
+
+  Statement stmt = null;
+  PreparedStatement pstmt = null;
+  ResultSet rs = null;
 
   private View() {
     this.aindaFuncionando = true;
@@ -24,6 +32,15 @@ public class View {
   }
 
   public void run() {
+    try {
+      this.stmt = _MainClass.conn.createStatement();
+    } catch (SQLException e) {
+      System.out.println("SQLException: " + e.getMessage());
+      System.out.println("SQLState: " + e.getSQLState());
+      System.out.println("VendorError: " + e.getErrorCode());
+      e.printStackTrace();
+    }
+
     while (this.aindaFuncionando) {
       this.signUpLogIn();
       if ((this.clienteAtivo != null) && (this.aindaFuncionando == true)) {
@@ -57,9 +74,22 @@ public class View {
           System.out.println();
           System.out.println("CPF: ");
           cpfDado = Integer.valueOf(scanner.nextLine()).intValue();
-          if (Locadora.existeCliente(cpfDado)) {
-            System.err.println("Este usuário já existe!");
-            break;
+          try {
+            this.rs =
+                this.stmt.executeQuery("SELECT COUNT(cpf) FROM cliente WHERE cpf = " + cpfDado);
+          } catch (SQLException e1) {
+            e1.printStackTrace();
+          }
+          try {
+            if (this.rs != null) {
+              this.rs.next();
+              if (this.rs.getInt(1) > 0) {
+                System.err.println("Este usuário já existe!");
+                break;
+              }
+            }
+          } catch (SQLException e1) {
+            e1.printStackTrace();
           }
           System.out.println();
           System.out.println("Senha: ");
@@ -76,7 +106,27 @@ public class View {
               telefonesDados.add(telefone);
             }
           }
-          cliente = new Cliente(cpfDado, senhaDada, nomeDado, telefonesDados);
+          cliente = new Cliente(cpfDado, senhaDada, nomeDado);
+          try {
+            this.pstmt = _MainClass.conn
+                .prepareStatement("INSERT INTO cliente (cpf, senha, nome) VALUES (?, ?, ?)");
+            this.pstmt.setInt(1, cpfDado);
+            this.pstmt.setString(2, senhaDada);
+            this.pstmt.setString(3, nomeDado);
+            this.pstmt.executeUpdate();
+            this.pstmt.close();
+            for (String telefone : telefonesDados) {
+              this.pstmt = _MainClass.conn
+                  .prepareStatement("INSERT INTO contato (cpf, contato) VALUES (?, ?)");
+              this.pstmt.setInt(1, cpfDado);
+              this.pstmt.setString(2, telefone);
+              this.pstmt.executeUpdate();
+              this.pstmt.close();
+            }
+          } catch (SQLException e1) {
+            e1.printStackTrace();
+          }
+          // TODO
           Locadora.addCliente(cliente);
           this.clienteAtivo = cliente;
           notLoggedIn = false;
@@ -88,10 +138,14 @@ public class View {
           System.out.println("Senha: ");
           senhaDada = scanner.nextLine();
           try {
-            cliente = Locadora.getCliente(cpfDado);
-            if (!cliente.getSenha().equals(senhaDada)) {
+            this.rs = this.stmt
+                .executeQuery("SELECT cpf, senha, nome FROM cliente WHERE cpf = " + cpfDado);
+            this.rs.next();
+            if (!this.rs.getString(2).equals(senhaDada)) {
               System.err.println("Senha incorreta!");
             } else {
+              // TODO
+              cliente = new Cliente(this.rs.getInt(1), this.rs.getString(2), this.rs.getString(3));
               this.clienteAtivo = cliente;
               notLoggedIn = false;
             }
@@ -161,10 +215,12 @@ public class View {
       escolhaAgencia = Integer.valueOf(scanner.nextLine()).intValue();
       agencia = Locadora.getAgencia(escolhaAgencia);
       System.out.println("Escolha um dos carros disponíveis na agência:");
-      for (String placa : agencia.getAutomoveisPlacas()) {
-        automovel = Locadora.getAutomovel(placa);
-        System.out.println(
-            "\nPlaca: " + automovel.getNumeroDaPlaca() + "\nModelo: " + automovel.getNomeModelo());
+      this.rs = this.stmt.executeQuery(
+          "SELECT automovel.placa, modelo.nome FROM automovel JOIN modelo ON automovel.modelo = modelo.id WHERE automovel.agencia = " +
+              escolhaAgencia + " AND automovel.locado = FALSE");
+      while (this.rs.next()) {
+        System.out
+            .println("\nPlaca: " + this.rs.getString(1) + "\nModelo: " + this.rs.getString(2));
       }
       escolhaPlaca = scanner.nextLine();
 
@@ -576,7 +632,7 @@ public class View {
               telefones.add(telefone);
             }
           }
-          Cliente cliente = new Cliente(cpf, senha, nome, telefones);
+          Cliente cliente = new Cliente(cpf, senha, nome);
           Locadora.addCliente(cliente);
           System.out.println("Cliente criado com sucesso!");
           break;
