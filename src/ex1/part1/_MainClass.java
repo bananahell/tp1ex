@@ -12,15 +12,16 @@ public class _MainClass {
   // localhost ou se ela vai usar o servidor remoto
   // freemysqlhosting.net
   /*
-   * static final String DATABASE_URL = "jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10264389";
-   * static final String DBUSER = "sql10264389";
-   * static final String DBPASS = "FDNglsrZcA";
+   * static final String DATABASE_URL =
+   * "jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10264389";
+   * static final String DBUSER = "sql10264389"; static final
+   * String DBPASS = "FDNglsrZcA";
    */
   // localhost
 
-  static final String DATABASE_URL = "jdbc:mysql://localhost/bd_locadora";
+  static final String DATABASE_URL = "jdbc:mysql://localhost/tp1";
   static final String DBUSER = "root";
-  static final String DBPASS = "alucard114";
+  static final String DBPASS = "traxos";
 
   public static ArrayList<Marca> marcas = new ArrayList<>();
   public static ArrayList<Modelo> modelos = new ArrayList<>();

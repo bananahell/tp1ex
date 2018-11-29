@@ -12,7 +12,7 @@ public class View {
   private boolean aindaCliente;
   private Cliente clienteAtivo;
 
-  private View() {
+  public View() {
     this.aindaFuncionando = true;
   }
 
@@ -36,7 +36,7 @@ public class View {
     }
   }
 
-  private void signUpLogIn() {
+  public void signUpLogIn() {
     Scanner scanner = new Scanner(System.in);
     boolean notLoggedIn = true;
 
@@ -46,7 +46,7 @@ public class View {
       System.out.println("1 - Sign up");
       System.out.println("2 - Log in");
       System.out.println("0 - Sair da aplicação");
-      int cpfDado;
+      long cpfDado;
       String nomeDado;
       String senhaDada;
       ArrayList<String> telefonesDados = new ArrayList<>();
@@ -84,7 +84,7 @@ public class View {
         case "2":
           System.out.println();
           System.out.println("CPF: ");
-          cpfDado = Integer.valueOf(scanner.nextLine()).intValue();
+          cpfDado = Integer.valueOf(scanner.nextLine()).longValue();
           System.out.println("Senha: ");
           senhaDada = scanner.nextLine();
           try {
@@ -110,7 +110,7 @@ public class View {
 
   }
 
-  private void clienteControle() {
+  public void clienteControle() {
     Scanner scanner = new Scanner(System.in);
     this.aindaCliente = true;
     System.out.println();
@@ -146,7 +146,7 @@ public class View {
     }
   }
 
-  private void clienteLocacao() {
+  public void clienteLocacao() {
 
     Scanner scanner = new Scanner(System.in);
     int escolhaAgencia;
@@ -203,7 +203,7 @@ public class View {
 
   }
 
-  private void clienteDevolucao() {
+  public void clienteDevolucao() {
     Scanner scanner = new Scanner(System.in);
     String placa;
     Locacao locacao;
@@ -232,7 +232,7 @@ public class View {
     }
   }
 
-  private void clienteCadastro() {
+  public void clienteCadastro() {
 
     Scanner scanner = new Scanner(System.in);
     boolean aindaCadastro = true;
@@ -308,7 +308,7 @@ public class View {
     }
   }
 
-  private void adminControle() {
+  public void adminControle() {
     Scanner scanner = new Scanner(System.in);
     boolean aindaAdmin = true;
     System.out.println();
@@ -348,7 +348,7 @@ public class View {
     }
   }
 
-  private void adminAgencia() {
+  public void adminAgencia() {
     Scanner scanner = new Scanner(System.in);
     boolean aindaAgencia = true;
 
@@ -425,7 +425,7 @@ public class View {
 
   }
 
-  private void adminAutomovel() {
+  public void adminAutomovel() {
     Scanner scanner = new Scanner(System.in);
     boolean aindaAutomovel = true;
 
@@ -527,7 +527,7 @@ public class View {
 
   }
 
-  private void adminCliente() {
+  public void adminCliente() {
     Scanner scanner = new Scanner(System.in);
     boolean aindaCliente = true;
 
@@ -623,7 +623,7 @@ public class View {
 
   }
 
-  private void adminLocacao() {
+  public void adminLocacao() {
     Scanner scanner = new Scanner(System.in);
     boolean aindaLocacao = true;
 

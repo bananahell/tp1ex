@@ -64,7 +64,7 @@ public class Automovel extends Modelo {
     return this.tipoDeCombustivel;
   }
 
-  public void setTipoDeCombustível(String tipoDeCombustivel) {
+  public void setTipoDeCombustivel(String tipoDeCombustivel) {
     this.tipoDeCombustivel = tipoDeCombustivel;
   }
 

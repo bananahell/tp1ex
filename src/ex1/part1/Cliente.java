@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Cliente {
 
-  private int cpf;
+  private long cpf;
   private String senha;
   private String nome;
   private ArrayList<String> telefones;
 
-  public Cliente(int cpf, String senha, String nome, ArrayList<String> telefones) {
+  public Cliente(long cpf, String senha, String nome, ArrayList<String> telefones) {
     this.cpf = cpf;
     this.senha = senha;
     this.nome = nome;
@@ -31,11 +31,11 @@ public class Cliente {
     return "CPF: " + this.cpf + "\nNome: " + this.nome + telefonesCliente;
   }
 
-  public int getCpf() {
+  public long getCpf() {
     return this.cpf;
   }
 
-  public void setCpf(int cpf) {
+  public void setCpf(long cpf) {
     this.cpf = cpf;
   }
 

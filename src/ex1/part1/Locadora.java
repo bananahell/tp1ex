@@ -15,7 +15,7 @@ public class Locadora {
         : Locadora.locacoes.get(Locadora.locacoes.size() - 1).getIdLocacao();
   }
 
-  public static Locacao getUltimaLocacaoNoCpfDoAutomovel(int cpf, String placa) throws Exception {
+  public static Locacao getUltimaLocacaoNoCpfDoAutomovel(long cpf, String placa) throws Exception {
     for (int i = Locadora.locacoes.size() - 1; i > -1; i--) {
       if ((Locadora.locacoes.get(i).getCpf() == cpf) &&
           placa.equals(Locadora.locacoes.get(i).getPlaca()) &&
@@ -58,7 +58,7 @@ public class Locadora {
     }
   }
 
-  public static void deleteCliente(int cpf) throws Exception {
+  public static void deleteCliente(long cpf) throws Exception {
     try {
       Locadora.clientes.remove(Locadora.getCliente(cpf));
     } catch (Exception e) {
@@ -92,7 +92,7 @@ public class Locadora {
     }
   }
 
-  public static boolean existeCliente(int cpf) {
+  public static boolean existeCliente(long cpf) {
     try {
       Locadora.getCliente(cpf);
       return true;
@@ -128,9 +128,9 @@ public class Locadora {
     throw new Exception("Automovel não encontrado!");
   }
 
-  public static Cliente getCliente(int cpf) throws Exception {
+  public static Cliente getCliente(long cpfDado) throws Exception {
     for (Cliente cliente : Locadora.clientes) {
-      if (cliente.getCpf() == cpf) {
+      if (cliente.getCpf() == cpfDado) {
         return cliente;
       }
     }

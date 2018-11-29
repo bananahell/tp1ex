@@ -14,12 +14,12 @@ public class Locacao {
   private int dias;
   private int agenciaLocada;
   private int agenciaDevolvida;
-  private int cpf;
+  private long cpf;
   private int tipo;
   private double valor;
   private String placa;
 
-  public Locacao(int agenciaLocada, int cpf, int tipo, String placa) {
+  public Locacao(int agenciaLocada, long cpf, int tipo, String placa) {
     this.idLocacao = Locadora.getUltimaLocacao() + 1;
     this.dataHoraLocado = LocalDateTime.now();
     this.dataHoraDevolvido = null;
@@ -29,7 +29,7 @@ public class Locacao {
     this.placa = placa;
   }
 
-  public Locacao(int dias, int agenciaLocada, int agenciaDevolvida, int cpf, int tipo,
+  public Locacao(int dias, int agenciaLocada, int agenciaDevolvida, long cpf, int tipo,
       String placa) {
     this.idLocacao = Locadora.getUltimaLocacao() + 1;
     this.dataHoraLocado = LocalDateTime.now();
@@ -113,11 +113,11 @@ public class Locacao {
     this.agenciaDevolvida = agenciaDevolvida;
   }
 
-  public int getCpf() {
+  public long getCpf() {
     return this.cpf;
   }
 
-  public void setCpf(int cpf) {
+  public void setCpf(long cpf) {
     this.cpf = cpf;
   }
 
