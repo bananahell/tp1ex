@@ -1,32 +1,33 @@
 package ex1.part1;
 
-import java.util.ArrayList;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class Agencia {
 
   private int codAgencia;
   private String local;
-  private ArrayList<String> automoveisPlacas;
+
+  Statement stmt = null;
+  PreparedStatement pstmt = null;
+  ResultSet rs = null;
 
   public Agencia(int codAgencia, String local) {
     this.codAgencia = codAgencia;
     this.local = local;
-    this.automoveisPlacas = new ArrayList<>();
   }
 
   @Override
-  public String toString() {
-    String carros = "\nCarros presentes (por placa):";
-    if (this.automoveisPlacas.isEmpty()) {
-      carros += " vazio";
-    } else {
-      for (String placa : this.automoveisPlacas) {
-        carros += "\n  ";
-        carros += placa.toString();
-      }
-    }
-    return "Código da agência: " + this.codAgencia + "\nLocal: " + this.local + carros;
+  public String toString() {/*
+                             * String carros = "\nCarros presentes (por placa):"; if
+                             * (this.automoveisPlacas.isEmpty()) { carros += " vazio"; }
+                             * else { for (String placa : this.automoveisPlacas) {
+                             * carros += "\n  "; carros += placa.toString(); } }
+                             */
+    return "Código da agência: " + this.codAgencia + "\nLocal: " + this.local;// + carros;
   }
 
   public int getCodAgencia() {
@@ -45,24 +46,26 @@ public class Agencia {
     this.local = local;
   }
 
-  public ArrayList<String> getAutomoveisPlacas() {
-    return this.automoveisPlacas;
-  }
-
-  public void setAutomoveis(ArrayList<String> automoveisPlacas) {
-    this.automoveisPlacas = automoveisPlacas;
-  }
-
   public void adicionaAutomovel(String placa) {
-    this.automoveisPlacas.add(placa);
+    try {
+      this.pstmt = _MainClass.conn
+          .prepareStatement("UPDATE automovel SET locado = false, agencia = ? WHERE placa = ?");
+      this.pstmt.setInt(1, this.codAgencia);
+      this.pstmt.setString(2, placa);
+      this.pstmt.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   public void tiraAutomovel(String placa) {
-    for (String placaProcura : this.automoveisPlacas) {
-      if (placa.equals(placaProcura)) {
-        this.automoveisPlacas.remove(placaProcura);
-        break;
-      }
+    try {
+      this.pstmt =
+          _MainClass.conn.prepareStatement("UPDATE automovel SET locado = true WHERE placa = ?");
+      this.pstmt.setString(1, placa);
+      this.pstmt.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 

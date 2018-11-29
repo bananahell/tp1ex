@@ -1,5 +1,7 @@
 package ex1.part1;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 
 
@@ -19,7 +21,14 @@ public class Locacao {
   private double valor;
   private String placa;
 
+<<<<<<< HEAD
   public Locacao(int agenciaLocada, long cpf, int tipo, String placa) {
+=======
+  Statement stmt = null;
+  ResultSet rs = null;
+
+  public Locacao(int agenciaLocada, int cpf, int tipo, String placa) {
+>>>>>>> branch 'conectando' of https://github.com/bananahell/tp1ex
     this.idLocacao = Locadora.getUltimaLocacao() + 1;
     this.dataHoraLocado = LocalDateTime.now();
     this.dataHoraDevolvido = null;
@@ -48,9 +57,12 @@ public class Locacao {
       try {
         this.dataHoraDevolvido = LocalDateTime.now();
         int tempo = this.dataHoraDevolvido.compareTo(this.dataHoraLocado);
+        this.stmt = _MainClass.conn.createStatement();
+        this.rs = this.stmt.executeQuery("SELECT valor FROM automovel WHERE placa = " + this.placa);
+        this.rs.next();
         // TODO aplica-se aqui a regra de negócio. definir o preço
         // aqui
-        this.valor = tempo * Locadora.getAutomovel(this.placa).getValorDeLocacao();
+        this.valor = tempo * this.rs.getDouble(1);
       } catch (Exception e) {
         System.err.println(e.getMessage());
         System.err.println("Deu problema ao calcular o preço!");
@@ -58,9 +70,13 @@ public class Locacao {
     } else { // Locação por diária
       try {
         this.dataHoraDevolvido = this.dataHoraLocado.plusDays(this.dias);
+        this.stmt = _MainClass.conn.createStatement();
+        this.rs = this.stmt
+            .executeQuery("SELECT valor FROM automovel WHERE placa = '" + this.placa + "'");
+        this.rs.next();
         // TODO aplica-se aqui a regra de negócio. definir o preço
         // aqui
-        this.valor = this.dias * Locadora.getAutomovel(this.placa).getValorDeLocacao();
+        this.valor = this.dias * this.rs.getDouble(1);
       } catch (Exception e) {
         System.err.println(e.getMessage());
         System.err.println("Deu problema ao calcular o preço!");

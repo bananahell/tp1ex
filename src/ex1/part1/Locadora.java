@@ -1,5 +1,8 @@
 package ex1.part1;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -9,6 +12,9 @@ public class Locadora {
   private static ArrayList<Cliente> clientes = new ArrayList<>();
   private static ArrayList<Locacao> locacoes = new ArrayList<>();
   private static ArrayList<Agencia> agencias = new ArrayList<>();
+
+  private static Statement stmt = null;
+  private static ResultSet rs = null;
 
   public static int getUltimaLocacao() {
     return (Locadora.locacoes.isEmpty()) ? 0
@@ -147,15 +153,24 @@ public class Locadora {
   }
 
   public static String toStringAgencias() {
-    String toStringAgencias = "Agências:";
-    if (Locadora.agencias.isEmpty()) {
-      return toStringAgencias + "vazio";
+    try {
+      boolean vazio = true;
+      Locadora.stmt = _MainClass.conn.createStatement();
+      Locadora.rs = Locadora.stmt.executeQuery("SELECT id, local FROM agencia");
+      String toStringAgencias = "Agências:";
+      while (Locadora.rs.next()) {
+        vazio = false;
+        toStringAgencias += "\nCódigo da agência: " + Locadora.rs.getInt(1) + "\nLocal: " +
+            Locadora.rs.getString(2);
+      }
+      if (vazio == true) {
+        return toStringAgencias + "vazio";
+      }
+      return toStringAgencias;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return "erro";
     }
-    for (Agencia agencia : Locadora.agencias) {
-      toStringAgencias +=
-          "\nCódigo da agência: " + agencia.getCodAgencia() + "\nLocal: " + agencia.getLocal();
-    }
-    return toStringAgencias;
   }
 
 }
